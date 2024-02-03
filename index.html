@@ -65,8 +65,7 @@
 
     // Attributionを折りたたみ表示
     map.addControl(new maplibregl.AttributionControl({
-      compact: true,
-      customAttribution: '<a href="https://twitter.com/shi__works" target="_blank">Twitter</a> | <a href="https://github.com/shi-works/nagasaki-point-cloud-map-on-maplibre-gl-js-demo" target="_blank">Github</a> | <a href="https://opennagasaki.nerc.or.jp/" target="_blank">オープンナガサキ</a> '
+      compact: true
     }));
 
     map.on('load', () => {
@@ -76,7 +75,7 @@
         type: deck.Tile3DLayer,
         pointSize: 2,
         // 3次元点群データ（3DTiles）ソース
-        data: 'https://xs489works.xsrv.jp/3dtiles/open_nagasaki/nagasaki_station/tileset.json',
+        data: 'https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/bldg_lod2/tileset.json',
         loader: Tiles3DLoader
       });
 
