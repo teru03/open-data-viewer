@@ -28,11 +28,29 @@
     let protocol = new pmtiles.Protocol();
     maplibregl.addProtocol("pmtiles", protocol.tile);
 
+    const styleobj = {
+    	"version": 8,
+    	"name": "optbv",
+    	"glyphs": "https://gsi-cyberjapan.github.io/optimal_bvmap/glyphs/{fontstack}/{range}.pbf",
+    	"sprite": "https://gsi-cyberjapan.github.io/optimal_bvmap/sprite/std",
+    	"sources": {
+    		"v": {
+    			"type": "vector",
+    			"minzoom": 4,
+    			"maxzoom": 16,
+    			"tiles": [
+    				"pmtiles://https://cyberjapandata.gsi.go.jp/xyz/optimal_bvmap-v1/optimal_bvmap-v1.pmtiles/{z}/{x}/{y}"
+    			],
+    			"attribution": "<a href='https://github.com/gsi-cyberjapan/optimal_bvmap' target='_blank'>国土地理院最適化ベクトルタイル(標準地図風スタイル)</a>"
+    		}
+    	}
+    }
+
     // マップの初期化
     const map = new maplibregl.Map({
       container: 'map',
       hash: true,
-      style: 'https://demotiles.maplibre.org/styles/osm-bright-gl-style/style.json',
+      style: styleobj,
       zoom: 16.75,
       center: [140.0906480,35.7012971],
       pitch: 69,
