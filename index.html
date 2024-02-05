@@ -86,6 +86,8 @@
       compact: true
     }));
 
+    import mathGl from 'https://cdn.jsdelivr.net/npm/math.gl@4.0.0/+esm'
+    
     map.on('load', () => {
       // MapboxLayerを使ったインターリーブ
       const tile3dLayer = new deck.MapboxLayer({
@@ -111,7 +113,15 @@
           zMins.sort((a, b) => a - b);
           content.cartographicOrigin.z -= 36.6641 + zMins[Math.floor(len / 2)];
         }
-*/        
+*/
+        ,onTileLoad: (tileHeader) => {
+            tileHeader.content.cartographicOrigin = new mathGL.Vector3(
+                tileHeader.content.cartographicOrigin.x,
+                tileHeader.content.cartographicOrigin.y,
+                tileHeader.content.cartographicOrigin.z - 40,
+            );
+        },
+        
       });
       // 3次元点群データ（3DTiles）レイヤ
       map.addLayer(tile3dLayer);
