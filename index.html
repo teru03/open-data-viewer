@@ -73,14 +73,15 @@
       const tile3dLayer = new deck.MapboxLayer({
         id: "yachiyo-station",
         type: deck.Tile3DLayer,
-        pointSize: 2,
+//        pointSize: 2,
         // 3次元点群データ（3DTiles）ソース
         data: 'https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/bldg_lod1/tileset.json',
         loader: Tiles3DLoader
         
         // 【参考】https://nagix.hatenablog.com/entry/2022/12/27/203825
         ,onTileLoad: d => {
-          d.content.cartographicOrigin.z -= 65
+//          d.content.cartographicOrigin.z -= 65
+          d.content.cartographicOrigin.z -= 36
         }
         
       });
