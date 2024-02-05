@@ -91,7 +91,7 @@
           const buffer = content.batchTableBinary.buffer;
           const key = content.batchTableJson;
           const len = key.gml_id.length;
-          const zMinView = new DataView(buffer, , len * 8);
+          const zMinView = new DataView(buffer, 0, len * 8);
           const zMins = [];
       
           for (let i = 0; i < len; i++) {
