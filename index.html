@@ -79,12 +79,11 @@
         loader: Tiles3DLoader
         
         // 【参考】https://nagix.hatenablog.com/entry/2022/12/27/203825
-/*        
         ,onTileLoad: d => {
           console.log(d.content)
-          d.content.cartographicOrigin.z -= 65
+          d.content.cartographicOrigin.z = 0
         }
-*/
+/*        
         ,onTileLoad: d => {
           
           const {content} = d
@@ -100,6 +99,7 @@
           zMins.sort((a, b) => a - b)
           content.cartographicOrigin.z -= 35.7320 + zMins[Math.floor(len / 2)]
         }
+*/        
       })
           
       
