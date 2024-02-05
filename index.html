@@ -35,7 +35,7 @@
       style: 'https://gsi-cyberjapan.github.io/gsivectortile-mapbox-gl-js/std.json',
       zoom: 16.75,
       center: [140.0906480,35.7012971],
-      pitch: 69,
+      pitch: 45,
       maxPitch: 85,
       bearing: 0,
       attributionControl: false,
@@ -79,13 +79,29 @@
         loader: Tiles3DLoader
         
         // 【参考】https://nagix.hatenablog.com/entry/2022/12/27/203825
+/*        
         ,onTileLoad: d => {
           console.log(d.content)
-//          d.content.cartographicOrigin.z -= 65
-          d.content.cartographicOrigin.z -= 36
+          d.content.cartographicOrigin.z -= 65
         }
-        
-      });
+*/
+        ,onTileLoad: d => {
+          
+          const {content} = d;
+          const buffer = content.batchTableBinary.buffer;
+          const key = content.batchTableJson;
+          const len = key.gml_id.length;
+          const zMinView = new DataView(buffer, , len * 8);
+          const zMins = [];
+      
+          for (let i = 0; i < len; i++) {
+              zMins.push(zMinView.getFloat64(i * 8, true));
+          }
+          zMins.sort((a, b) => a - b);
+          content.cartographicOrigin.z -= 36.6641 + zMins[Math.floor(len / 2)];
+        }
+          
+      
       // 3次元点群データ（3DTiles）レイヤ
       map.addLayer(tile3dLayer);
 
