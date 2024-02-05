@@ -96,9 +96,10 @@
         pointSize: 2,
         // 3次元点群データ（3DTiles）ソース
         data: 'https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/bldg_lod2/tileset.json',
-        loader: Tiles3DLoader,
+        loader: Tiles3DLoader
+/*        
         // 【参考】https://nagix.hatenablog.com/entry/2022/12/27/203825
-        onTileLoad: d => {
+        ,onTileLoad: d => {
           const { content } = d;
           const buffer = content.batchTableBinary.buffer;
           const key = content.batchTableJson;
@@ -112,6 +113,7 @@
           zMins.sort((a, b) => a - b);
           content.cartographicOrigin.z -= 36.6641 + zMins[Math.floor(len / 2)];
         }
+*/        
       });
 
       // 3次元点群データ（3DTiles）レイヤ
