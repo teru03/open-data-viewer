@@ -87,19 +87,20 @@
 */
         ,onTileLoad: d => {
           
-          const {content} = d;
-          const buffer = content.batchTableBinary.buffer;
-          const key = content.batchTableJson;
-          const len = key.gml_id.length;
-          const zMinView = new DataView(buffer, 0, len * 8);
+          const {content} = d
+          const buffer = content.batchTableBinary.buffer
+          const key = content.batchTableJson
+          const len = key.gml_id.length
+          const zMinView = new DataView(buffer, 0, len * 8)
           const zMins = [];
       
           for (let i = 0; i < len; i++) {
               zMins.push(zMinView.getFloat64(i * 8, true));
           }
-          zMins.sort((a, b) => a - b);
-          content.cartographicOrigin.z -= 35.7320 + zMins[Math.floor(len / 2)];
+          zMins.sort((a, b) => a - b)
+          content.cartographicOrigin.z -= 35.7320 + zMins[Math.floor(len / 2)]
         }
+      )
           
       
       // 3次元点群データ（3DTiles）レイヤ
