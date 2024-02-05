@@ -81,7 +81,7 @@
         // 【参考】https://nagix.hatenablog.com/entry/2022/12/27/203825
         ,onTileLoad: d => {
           console.log(d.content)
-          d.content.cartographicOrigin.z = 65
+          d.content.cartographicOrigin.z -= 65
         }
 /*        
         ,onTileLoad: d => {
