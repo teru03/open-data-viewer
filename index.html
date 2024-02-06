@@ -65,9 +65,14 @@
       <br><input type="button" onclick="changeMap()" value="変更" />
     </div>
     <script type="text/javascript">
-      //マップを初期化
+      //パラメータ
+      let defPitch = 45
+      let defGioid = 0
+      let defLod = "bldg_lod2_no_texture"
       
+      //マップを初期化
       let map = null
+      
       // addProtocolの設定
       let protocol = new pmtiles.Protocol();
       maplibregl.addProtocol("pmtiles", protocol.tile);
@@ -79,7 +84,7 @@
         style: 'https://gsi-cyberjapan.github.io/gsivectortile-mapbox-gl-js/std.json',
         zoom: 16.75,
         center: [140.0906480,35.7012971],
-        pitch: 45,
+        pitch: defPitch,
         maxPitch: 85,
         bearing: 0,
         attributionControl: false,
@@ -114,7 +119,7 @@
   
       map.on('load', () => {
         // MapboxLayerを使ったインターリーブ
-        const tile3dLayer = add3dLayer(0,"bldg_lod2_no_texture") 
+        const tile3dLayer = add3dLayer(defGioid,defLod) 
                 
         // 3次元点群データ（3DTiles）レイヤ
         map.addLayer(tile3dLayer);
@@ -158,13 +163,17 @@
         
       function changeMap(){
         const pitch = document.getElementById("pitch")
-        map.setPitch(Number(pitch.value))
+        if(defPitch !== pitch){
+          map.setPitch(Number(pitch.value))
+        }
         const gioid = document.getElementById("gioid")
         const lod = document.getElementById("lod")
-        map.removeLayer("yachiyo-station")
-        map.setPitch(Number(pitch.value))
-        const tile3dLayer = add3dLayer(Number(gioid.value),lod.value)
-        map.addLayer(tile3dLayer)
+        if(defGioid !== gioid || defLod !== lod){
+          map.removeLayer("yachiyo-station")
+          map.setPitch(Number(pitch.value))
+          const tile3dLayer = add3dLayer(Number(gioid.value),lod.value)
+          map.addLayer(tile3dLayer)
+        }
       }
   
     </script>      
