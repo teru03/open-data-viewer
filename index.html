@@ -21,11 +21,12 @@
         position: absolute;
         top: 0px;
         margin: 5px;
-        height: 100px;
+        height: 250px;
         width: 200px;
         background-color: lightgray;
         border-radius: 5px;
         .menulabel {
+            clear: both;
             float: left;
             margin: 5px;
             width: 30%;
@@ -44,6 +45,23 @@
     <div id="menu">
       <label class="menulabel" >pitch</label>
       <input class="menutext" id="pitch" type="text" value="45"/>
+      <br><label class="menulabel" >gioid</label>
+      <input class="menutext" id="gioid" type="text" value="0"/>
+      <fieldset>
+        <legend>Select lod:</legend>
+        <div>
+          <input type="radio" id="lod"value="bldg_lod1" />
+          <label for="lod">lod1</label>
+        </div>
+        <div>
+          <input type="radio" id="lod"value="bldg_lod2" />
+          <label for="lod">lod2</label>
+        </div>
+        <div>
+          <input type="radio" id="lod"value="bldg_lod2_no_texture" checked/>
+          <label for="lod">lod2_no_texture</label>
+        </div>
+      </fieldset>      
       <br><input type="button" onclick="changeMap()" value="変更" />
     </div>
     <script type="text/javascript">
@@ -96,18 +114,26 @@
   
       map.on('load', () => {
         // MapboxLayerを使ったインターリーブ
+        const tile3dLayer = add3dLayer(0,"bldg_lod2_no_texture") 
+                
+        // 3次元点群データ（3DTiles）レイヤ
+        map.addLayer(tile3dLayer);
+  
+      }) 
+      
+      function add3dLayer(gioid,lod) {
         const tile3dLayer = new deck.MapboxLayer({
           id: "yachiyo-station",
           type: deck.Tile3DLayer,
   //        pointSize: 2,
           // 3次元点群データ（3DTiles）ソース
-          data: 'https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/bldg_lod2_no_texture/tileset.json',
+          data: `https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/${lod}/tileset.json`,
           loader: Tiles3DLoader
           
           // 【参考】https://nagix.hatenablog.com/entry/2022/12/27/203825
           ,onTileLoad: d => {
             console.log(d.content)
-            d.content.cartographicOrigin.z -= 65
+            d.content.cartographicOrigin.z -= gioid
           }
   /*        
           ,onTileLoad: d => {
@@ -127,16 +153,17 @@
           }
   */        
         })
-            
-        
-        // 3次元点群データ（3DTiles）レイヤ
-        map.addLayer(tile3dLayer);
-  
-      })    
+        return tile3dLayer
+      }   
         
       function changeMap(){
         const pitch = document.getElementById("pitch")
         map.setPitch(Number(pitch.value))
+        const gioid = document.getElementById("gioid")
+        const lod = document.getElementById("lod")
+        map.removeLayer("yachiyo-station")
+        map.setPitch(Number(pitch.value))
+        add3dLayer(Number(gioid.value),lod.value)
       }
   
     </script>      
