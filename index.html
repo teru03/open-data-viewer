@@ -168,12 +168,13 @@
             }
         } 
         if(defGioid !== gioidVal || defLod !== lodVal){
-          map.removeLayer("yachiyo-station")
-          alert(`${gioidVal} ${lodVal}`)
+//          map.removeLayer("yachiyo-station")
+//          alert(`${gioidVal} ${lodVal}`)
           defGioid = gioidVal
           defLod = lodVal
-          const tile3dLayer = add3dLayer()
-          map.addLayer(tile3dLayer)
+//          const tile3dLayer = add3dLayer()
+//          map.addLayer(tile3dLayer)
+          map.getTileData(`https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/${defLod}/tileset.json`)
         }
       }
   
