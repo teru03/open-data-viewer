@@ -117,6 +117,7 @@
       }) 
       
       function add3dLayer(gioid,lod) {
+        alert(gioid)
         const tile3dLayer = new deck.MapboxLayer({
           id: "yachiyo-station",
           type: deck.Tile3DLayer,
@@ -169,8 +170,8 @@
         } 
         if(defGioid !== gioidVal || defLod !== lodVal){
           map.removeLayer("yachiyo-station")
-          const tile3dLayer = add3dLayer(gioidVal,lodVal)
           alert(`${gioidVal} ${lodVal}`)
+          const tile3dLayer = add3dLayer(gioidVal,lodVal)
           map.addLayer(tile3dLayer)
           defGioid = gioidVal
           defLod = lodVal
