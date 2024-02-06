@@ -47,21 +47,11 @@
       <input class="menutext" id="pitch" type="text" value="45"/>
       <br><label class="menulabel" >gioid</label>
       <input class="menutext" id="gioid" type="text" value="0"/>
-      <fieldset>
-        <legend>Select lod:</legend>
-        <div>
-          <input type="radio" id="bldg_lod1" value="bldg_lod1" />
-          <label for="bldg_lod1">lod1</label>
-        </div>
-        <div>
-          <input type="radio" id="bldg_lod2" value="bldg_lod2" />
-          <label for="bldg_lod2">lod2</label>
-        </div>
-        <div>
-          <input type="radio" id="bldg_lod2_no_texture" value="bldg_lod2_no_texture" checked/>
-          <label for="bldg_lod2_no_texture">lod2_no_texture</label>
-        </div>
-      </fieldset>      
+      <div>
+        <label><input type="radio" id="bldg_lod1" name="lod" value="bldg_lod1" />lod1</label>
+        <label></label><input type="radio" id="bldg_lod2" name="lod" value="bldg_lod2" />log2</lable>
+        <label></label><input type="radio" id="bldg_lod2_no_texture" name="lod" value="bldg_lod2_no_texture" checked/>lod2_no_texture</label>
+      </div>
       <br><input type="button" onclick="changeMap()" value="変更" />
     </div>
     <script type="text/javascript">
@@ -167,11 +157,11 @@
           map.setPitch(Number(pitch.value))
         }
         const gioid = document.getElementById("gioid")
-        const lod = document.getElementById("lod")
-        if(defGioid !== Number(gioid.value) || defLod !== lod.valuue){
+        const lod = document.getElementsByName("lod")
+        if(defGioid !== Number(gioid.value) || defLod !== lod.checked){
           map.removeLayer("yachiyo-station")
           map.setPitch(Number(pitch.value))
-          const tile3dLayer = add3dLayer(Number(gioid.value),lod.value)
+          const tile3dLayer = add3dLayer(Number(gioid.value),lod.checked)
           map.addLayer(tile3dLayer)
         }
       }
