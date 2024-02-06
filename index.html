@@ -153,25 +153,27 @@
         
       function changeMap(){
         const pitch = document.getElementById("pitch")
-        if(defPitch !== Number(pitch.value)){
-          map.setPitch(Number(pitch.value))
-          defPitch = Number(pitch.value)
+        const pitchVal = Number(pitch.value)
+        if(defPitch !== pitchVal){
+          map.setPitch(pitchVal)
+          defPitch = pitchVal
         }
         const gioid = document.getElementById("gioid")
+        const gioidVal = Number(gioid.value)
         const lod = document.getElementsByName("lod")
-        let lodval = defLod
+        let lodVal = defLod
         for (let i = 0; i < lod.length; i++){
             if (lod[i].checked){
-               lodval = lod[i].value;
+               lodVal = lod[i].value;
             }
         } 
-        if(defGioid !== Number(gioid.value) || defLod !== lodval){
+        if(defGioid !== gioidVal || defLod !== lodVal){
           map.removeLayer("yachiyo-station")
-          const tile3dLayer = add3dLayer(Number(gioid.value),lodval)
-          alert(`${gioid.value} ${lodval}`)
+          const tile3dLayer = add3dLayer(gioidVal,lodVal)
+          alert(`${gioidVal} ${lodVal}`)
           map.addLayer(tile3dLayer)
-          defGioid = Number(gioid.value)
-          defLod = lodval
+          defGioid = gioidVal
+          defLod = lodVal
         }
       }
   
