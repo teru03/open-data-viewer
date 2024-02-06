@@ -163,12 +163,12 @@
         
       function changeMap(){
         const pitch = document.getElementById("pitch")
-        if(defPitch !== pitch){
+        if(defPitch !== Number(pitch.value)){
           map.setPitch(Number(pitch.value))
         }
         const gioid = document.getElementById("gioid")
         const lod = document.getElementById("lod")
-        if(defGioid !== gioid || defLod !== lod){
+        if(defGioid !== Number(gioid.value) || defLod !== lod.valuue){
           map.removeLayer("yachiyo-station")
           map.setPitch(Number(pitch.value))
           const tile3dLayer = add3dLayer(Number(gioid.value),lod.value)
