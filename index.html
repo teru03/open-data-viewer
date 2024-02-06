@@ -116,20 +116,19 @@
   
       }) 
       
-      function add3dLayer(gioid,lod) {
-        alert(gioid)
+      function add3dLayer() {
         const tile3dLayer = new deck.MapboxLayer({
           id: "yachiyo-station",
           type: deck.Tile3DLayer,
   //        pointSize: 2,
           // 3次元点群データ（3DTiles）ソース
-          data: `https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/${lod}/tileset.json`,
+          data: `https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/${defLod}/tileset.json`,
           loader: Tiles3DLoader
           
           // 【参考】https://nagix.hatenablog.com/entry/2022/12/27/203825
           ,onTileLoad: d => {
             console.log(d.content)
-            d.content.cartographicOrigin.z -= gioid
+            d.content.cartographicOrigin.z -= defGioid
           }
   /*        
           ,onTileLoad: d => {
@@ -171,10 +170,10 @@
         if(defGioid !== gioidVal || defLod !== lodVal){
           map.removeLayer("yachiyo-station")
           alert(`${gioidVal} ${lodVal}`)
-          const tile3dLayer = add3dLayer(gioidVal,lodVal)
-          map.addLayer(tile3dLayer)
           defGioid = gioidVal
           defLod = lodVal
+          const tile3dLayer = add3dLayer()
+          map.addLayer(tile3dLayer)
         }
       }
   
