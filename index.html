@@ -155,6 +155,7 @@
         const pitch = document.getElementById("pitch")
         if(defPitch !== Number(pitch.value)){
           map.setPitch(Number(pitch.value))
+          defPitch = Number(pitch.value)
         }
         const gioid = document.getElementById("gioid")
         const lod = document.getElementsByName("lod")
@@ -169,6 +170,8 @@
           const tile3dLayer = add3dLayer(Number(gioid.value),lodval)
           alert(`${gioid.value} ${lodval}`)
           map.addLayer(tile3dLayer)
+          defGioid = Number(gioid.value)
+          defLod = lodval
         }
       }
   
