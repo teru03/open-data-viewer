@@ -164,11 +164,10 @@
                lodval = lod[i].value;
             }
         } 
-        alert(`${gioid.value} ${lodval}`)
+//        alert(`${gioid.value} ${lodval}`)
         if(defGioid !== Number(gioid.value) || defLod !== lodval){
           map.removeLayer("yachiyo-station")
-          map.setPitch(Number(pitch.value))
-          const tile3dLayer = add3dLayer(Number(gioid.value),lod.checked)
+          const tile3dLayer = add3dLayer(Number(gioid.value),lodval)
           map.addLayer(tile3dLayer)
         }
       }
