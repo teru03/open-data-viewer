@@ -163,7 +163,8 @@
         const lod = document.getElementById("lod")
         map.removeLayer("yachiyo-station")
         map.setPitch(Number(pitch.value))
-        add3dLayer(Number(gioid.value),lod.value)
+        const tile3dLayer = add3dLayer(Number(gioid.value),lod.value)
+        map.addLayer(tile3dLayer)
       }
   
     </script>      
