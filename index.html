@@ -36,99 +36,100 @@
       <label>pitch</label>
       <input id="pitch" type="text"/>
       <input type="button" onclick="changeMap()" />
-  </body>
-  <script type="test/javascript">
-    //マップを初期化
-    
-    let map = null
-    // addProtocolの設定
-    let protocol = new pmtiles.Protocol();
-    maplibregl.addProtocol("pmtiles", protocol.tile);
-
-    // マップの初期化
-    map = new maplibregl.Map({
-      container: 'map',
-      hash: true,
-      style: 'https://gsi-cyberjapan.github.io/gsivectortile-mapbox-gl-js/std.json',
-      zoom: 16.75,
-      center: [140.0906480,35.7012971],
-      pitch: 45,
-      maxPitch: 85,
-      bearing: 0,
-      attributionControl: false,
-    })
-
-    // ズーム・回転
-    map.addControl(new maplibregl.NavigationControl());
-
-    // フルスクリーンモードのオンオフ
-    map.addControl(new maplibregl.FullscreenControl());
-
-    // 現在位置表示
-    map.addControl(new maplibregl.GeolocateControl({
-      positionOptions: {
-        enableHighAccuracy: false
-      },
-      fitBoundsOptions: { maxZoom: 18 },
-      trackUserLocation: true,
-      showUserLocation: true
-    }));
-
-    // スケール表示
-    map.addControl(new maplibregl.ScaleControl({
-      maxWidth: 200,
-      unit: 'metric'
-    }));
-
-    // Attributionを折りたたみ表示
-    map.addControl(new maplibregl.AttributionControl({
-      compact: true
-    }));
-
-    map.on('load', () => {
-      // MapboxLayerを使ったインターリーブ
-      const tile3dLayer = new deck.MapboxLayer({
-        id: "yachiyo-station",
-        type: deck.Tile3DLayer,
-//        pointSize: 2,
-        // 3次元点群データ（3DTiles）ソース
-        data: 'https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/bldg_lod2_no_texture/tileset.json',
-        loader: Tiles3DLoader
-        
-        // 【参考】https://nagix.hatenablog.com/entry/2022/12/27/203825
-        ,onTileLoad: d => {
-          console.log(d.content)
-          d.content.cartographicOrigin.z -= 65
-        }
-/*        
-        ,onTileLoad: d => {
-          
-          const {content} = d
-          const buffer = content.batchTableBinary.buffer
-          const key = content.batchTableJson
-          const len = key.gml_id.length
-          const zMinView = new DataView(buffer, 0, len * 8)
-          const zMins = [];
+    </div>
+    <script type="test/javascript">
+      //マップを初期化
       
-          for (let i = 0; i < len; i++) {
-              zMins.push(zMinView.getFloat64(i * 8, true));
-          }
-          zMins.sort((a, b) => a - b)
-          content.cartographicOrigin.z -= 35.7320 + zMins[Math.floor(len / 2)]
-        }
-*/        
+      let map = null
+      // addProtocolの設定
+      let protocol = new pmtiles.Protocol();
+      maplibregl.addProtocol("pmtiles", protocol.tile);
+  
+      // マップの初期化
+      map = new maplibregl.Map({
+        container: 'map',
+        hash: true,
+        style: 'https://gsi-cyberjapan.github.io/gsivectortile-mapbox-gl-js/std.json',
+        zoom: 16.75,
+        center: [140.0906480,35.7012971],
+        pitch: 45,
+        maxPitch: 85,
+        bearing: 0,
+        attributionControl: false,
       })
+  
+      // ズーム・回転
+      map.addControl(new maplibregl.NavigationControl());
+  
+      // フルスクリーンモードのオンオフ
+      map.addControl(new maplibregl.FullscreenControl());
+  
+      // 現在位置表示
+      map.addControl(new maplibregl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: false
+        },
+        fitBoundsOptions: { maxZoom: 18 },
+        trackUserLocation: true,
+        showUserLocation: true
+      }));
+  
+      // スケール表示
+      map.addControl(new maplibregl.ScaleControl({
+        maxWidth: 200,
+        unit: 'metric'
+      }));
+  
+      // Attributionを折りたたみ表示
+      map.addControl(new maplibregl.AttributionControl({
+        compact: true
+      }));
+  
+      map.on('load', () => {
+        // MapboxLayerを使ったインターリーブ
+        const tile3dLayer = new deck.MapboxLayer({
+          id: "yachiyo-station",
+          type: deck.Tile3DLayer,
+  //        pointSize: 2,
+          // 3次元点群データ（3DTiles）ソース
+          data: 'https://storage.googleapis.com/open-gis-data-mt/yachiyo-city/bldg_lod2_no_texture/tileset.json',
+          loader: Tiles3DLoader
           
-      
-      // 3次元点群データ（3DTiles）レイヤ
-      map.addLayer(tile3dLayer);
-
-    })    
-      
-    function changeMap(){
-      const pitch = document.getElementById("pitch")
-      map.setPitch(pitch)
-    }
-
-  </script>      
+          // 【参考】https://nagix.hatenablog.com/entry/2022/12/27/203825
+          ,onTileLoad: d => {
+            console.log(d.content)
+            d.content.cartographicOrigin.z -= 65
+          }
+  /*        
+          ,onTileLoad: d => {
+            
+            const {content} = d
+            const buffer = content.batchTableBinary.buffer
+            const key = content.batchTableJson
+            const len = key.gml_id.length
+            const zMinView = new DataView(buffer, 0, len * 8)
+            const zMins = [];
+        
+            for (let i = 0; i < len; i++) {
+                zMins.push(zMinView.getFloat64(i * 8, true));
+            }
+            zMins.sort((a, b) => a - b)
+            content.cartographicOrigin.z -= 35.7320 + zMins[Math.floor(len / 2)]
+          }
+  */        
+        })
+            
+        
+        // 3次元点群データ（3DTiles）レイヤ
+        map.addLayer(tile3dLayer);
+  
+      })    
+        
+      function changeMap(){
+        const pitch = document.getElementById("pitch")
+        map.setPitch(pitch)
+      }
+  
+    </script>      
+  </body>
 </html>
