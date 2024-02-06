@@ -163,7 +163,8 @@
             if (lod[i].checked){
                lodval = lod[i].value;
             }
-        }        
+        } 
+        alert(`${gioid.value} ${lodval}`)
         if(defGioid !== Number(gioid.value) || defLod !== lodval){
           map.removeLayer("yachiyo-station")
           map.setPitch(Number(pitch.value))
