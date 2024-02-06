@@ -49,8 +49,8 @@
       <input class="menutext" id="gioid" type="text" value="0"/>
       <fieldSet>
         <label><input type="radio" id="bldg_lod1" name="lod" value="bldg_lod1" />lod1</label>
-        <br><label></label><input type="radio" id="bldg_lod2" name="lod" value="bldg_lod2" />log2</lable>
-        <br><label></label><input type="radio" id="bldg_lod2_no_texture" name="lod" value="bldg_lod2_no_texture" checked/>lod2_no_texture</label>
+        <br><label></label><input type="radio" id="bldg_lod2" name="lod" value="bldg_lod2" checked/>log2</lable>
+        <br><label></label><input type="radio" id="bldg_lod2_no_texture" name="lod" value="bldg_lod2_no_texture"/>lod2_no_texture</label>
       </fieldSet>
       <br><input type="button" onclick="changeMap()" value="変更" />
     </div>
@@ -58,7 +58,7 @@
       //パラメータ
       let defPitch = 45
       let defGioid = 0
-      let defLod = "bldg_lod2_no_texture"
+      let defLod = "bldg_lod2"
       
       //マップを初期化
       let map = null
