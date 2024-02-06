@@ -158,7 +158,13 @@
         }
         const gioid = document.getElementById("gioid")
         const lod = document.getElementsByName("lod")
-        if(defGioid !== Number(gioid.value) || defLod !== lod.checked){
+        let lodval = defLod
+        for (let i = 0; i < lod.len; i++){
+            if (lod[i].checked){
+               lodval = lod.value;
+            }
+        }        
+        if(defGioid !== Number(gioid.value) || defLod !== lodval){
           map.removeLayer("yachiyo-station")
           map.setPitch(Number(pitch.value))
           const tile3dLayer = add3dLayer(Number(gioid.value),lod.checked)
