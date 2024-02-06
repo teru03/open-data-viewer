@@ -1,41 +1,50 @@
 <html>
   <head>
-<head>
-  <title>3D都市モデルPLATEAU 八千代台駅（3D Tiles）</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
-  <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet">
-  <script src="https://unpkg.com/pmtiles@2.10.0/dist/index.js"></script>
-  <script src="https://unpkg.com/deck.gl@8.9.0/dist.min.js"></script>
-  <script src="https://unpkg.com/@loaders.gl/3d-tiles@^2.3.0/dist/dist.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-    }
-
-    #map {
-      height: 100%;
-      width: 100%;
-    }
-    #menu {
-      position: absoluute;
-      top: 0px;
-      margin: 5px;
-      height: 100px;
-      width: 150px;
-      background-color: lightgray;
-      border-radius: 5px;
-    }
-  </style>
+    <title>3D都市モデルPLATEAU 八千代台駅（3D Tiles）</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet">
+    <script src="https://unpkg.com/pmtiles@2.10.0/dist/index.js"></script>
+    <script src="https://unpkg.com/deck.gl@8.9.0/dist.min.js"></script>
+    <script src="https://unpkg.com/@loaders.gl/3d-tiles@^2.3.0/dist/dist.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+  
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+      #menu {
+        position: absolute;
+        top: 0px;
+        margin: 5px;
+        height: 100px;
+        width: 200px;
+        background-color: lightgray;
+        border-radius: 5px;
+        .menulabel {
+            float: left;
+            margin: 5px;
+            width: 30%;
+        }
+        .menutext {
+            float: left;
+            margin: 5px;
+            width: 60%;
+        }
+      }
+        
+    </style>
   </head>
   <body>
     <div id="map"></div>
     <div id="menu">
-      <h5>menu</h5>
-      <label>pitch</label>
-      <input id="pitch" type="text"/>
-      <input type="button" onclick="changeMap()" />
+      <label class="menulabel" >pitch</label>
+      <input class="menutext" id="pitch" type="text" value="45"/>
+      <br><input type="button" onclick="changeMap()" value="変更" />
     </div>
     <script type="text/javascript">
       //マップを初期化
