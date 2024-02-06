@@ -161,7 +161,7 @@
         let lodval = defLod
         for (let i = 0; i < lod.length; i++){
             if (lod[i].checked){
-               lodval = lod.value;
+               lodval = lod[i].value;
             }
         }        
         if(defGioid !== Number(gioid.value) || defLod !== lodval){
